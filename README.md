@@ -82,41 +82,57 @@ SkillSync/
 
 ---
 
-## ⚙️ Installation & Setup (Local)
+📦 Setup Instructions
 
-### 1. Clone the repository
-```bash
-git clone https://github.com/your-username/skillsync.git
-Setup Backend
+🔁 Clone the Repository
+git clone https://github.com/shaimasharfuddin-mern/job-portal.git
+cd job-portal
+
+⚙️ Backend Setup
 cd backend
 npm install
 npm start
-Setup Frontend
+
+💻 Frontend Setup (Vite)
 cd frontend
 npm install
 npm run dev
-Environment Variables
+
+🔐 Environment Variables
 Backend .env
 PORT=5000
-MONGO_URI=mongodb+srv://skillsync:user123@cluster0.2q1kx1y.mongodb.net/skillsync?retryWrites=true&w=majority
+MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
+
 Frontend .env
 VITE_API_URL=https://job-portal-kx59.onrender.com/api
-Future Improvements
-Job application tracking system
-Resume upload feature (Cloudinary integration)
-Role-based access control (Admin/Recruiter/User)
-Email notifications for applications
-AI-based job matching score
-Author
 
-Your Shaima
-Full Stack Developer
+🚀 Features
+🔐 JWT-based authentication (Login/Register)
+💼 Job posting and job browsing system
+🧑‍💻 Skill-based job matching
+📄 Apply for jobs functionality
+☁️ Fully cloud-deployed backend (Render)
+🌐 Frontend deployed on Vercel
+🗄️ MongoDB Atlas integration
+
+🧠 Future Enhancements
+Resume upload system (Cloudinary integration)
+Role-based access control (Admin / Recruiter / User)
+Email notifications for job applications
+Advanced job filtering and search
+AI-based job matching score system
+
+👨‍💻 Developer
+
+Shaima
+Full Stack Developer (MERN Stack)
 GitHub: https://github.com/shaimasharfuddin-mern/job-portal
-Project Highlights
 
-✔ Full-stack MERN application
+⭐ Project Highlights
+
+✔ Production-ready MERN stack application
 ✔ Real-world job portal system
 ✔ Cloud deployment (Vercel + Render + MongoDB Atlas)
-✔ Secure authentication system
-✔ Scalable architecture
+✔ Secure authentication system using JWT
+✔ Scalable and modular architecture
