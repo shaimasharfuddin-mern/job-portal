@@ -101,20 +101,20 @@ VITE_API_URL=https://job-portal-kx59.onrender.com/api
 
 
 🚀 Features
-JWT-based authentication (Login / Register)
-Job posting and job browsing system
-Skill-based job matching
-Apply for jobs functionality
-Fully cloud-deployed backend (Render)
-Frontend deployed on Vercel
-MongoDB Atlas integration
+✔JWT-based authentication (Login / Register)
+✔Job posting and job browsing system
+✔Skill-based job matching
+✔Apply for jobs functionality
+✔Fully cloud-deployed backend (Render)
+✔Frontend deployed on Vercel
+✔MongoDB Atlas integration
 
 🧠 Future Enhancements
-Resume upload system (Cloudinary integration)
-Role-based access control (Admin / Recruiter / User)
-Email notifications for job applications
-Advanced job filtering and search
-AI-based job matching score system
+✔Resume upload system (Cloudinary integration)
+✔Role-based access control (Admin / Recruiter / User)
+✔Email notifications for job applications
+✔Advanced job filtering and search
+✔AI-based job matching score system
 
 
 👨‍💻 Developer
