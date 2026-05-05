@@ -82,39 +82,32 @@ SkillSync/
 
 ---
 
-📦 Setup Instructions
+## 📦 Setup Instructions
 
-🔁 Clone the Repository
+### 🔁 Clone the Repository
+```bash
 git clone https://github.com/shaimasharfuddin-mern/job-portal.git
 cd job-portal
-
-⚙️ Backend Setup
 cd backend
 npm install
 npm start
-
-💻 Frontend Setup (Vite)
 cd frontend
 npm install
 npm run dev
-
-🔐 Environment Variables
-Backend .env
 PORT=5000
 MONGO_URI=your_mongodb_connection_string
 JWT_SECRET=your_secret_key
-
-Frontend .env
 VITE_API_URL=https://job-portal-kx59.onrender.com/api
 
+
 🚀 Features
-🔐 JWT-based authentication (Login/Register)
-💼 Job posting and job browsing system
-🧑‍💻 Skill-based job matching
-📄 Apply for jobs functionality
-☁️ Fully cloud-deployed backend (Render)
-🌐 Frontend deployed on Vercel
-🗄️ MongoDB Atlas integration
+JWT-based authentication (Login / Register)
+Job posting and job browsing system
+Skill-based job matching
+Apply for jobs functionality
+Fully cloud-deployed backend (Render)
+Frontend deployed on Vercel
+MongoDB Atlas integration
 
 🧠 Future Enhancements
 Resume upload system (Cloudinary integration)
@@ -123,14 +116,14 @@ Email notifications for job applications
 Advanced job filtering and search
 AI-based job matching score system
 
-👨‍💻 Developer
 
+👨‍💻 Developer
 Shaima
 Full Stack Developer (MERN Stack)
 GitHub: https://github.com/shaimasharfuddin-mern/job-portal
 
-⭐ Project Highlights
 
+⭐ Project Highlights
 ✔ Production-ready MERN stack application
 ✔ Real-world job portal system
 ✔ Cloud deployment (Vercel + Render + MongoDB Atlas)
