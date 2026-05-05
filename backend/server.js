@@ -1,35 +1,63 @@
 const express = require("express");
+const mongoose = require("mongoose");
 const cors = require("cors");
-require("dotenv").config();
+const dotenv = require("dotenv");
 
-const connectDB = require("./config/db");
+dotenv.config();
 
 const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require("./routes/jobRoutes");
-const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 
-// middleware
-app.use(cors({
-  origin: "*"
-}));
-// db
-connectDB();
+/* ---------------- CORS ---------------- */
 
-// routes
+app.use(
+  cors({
+    origin: "*",
+    methods: "*",
+    allowedHeaders: "*",
+  })
+);
+
+/* ---------------- HARD BODY FIX (IMPORTANT) ---------------- */
+
+// This forces Express to ALWAYS parse JSON safely
+app.use(express.json({ limit: "10mb" }));
+app.use(express.urlencoded({ extended: true }));
+
+// 🔥 EXTRA SAFETY: manual body capture (fallback)
+app.use((req, res, next) => {
+  if (!req.body) {
+    req.body = {};
+  }
+  next();
+});
+
+/* ---------------- ROUTES ---------------- */
+
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
-app.use("/api/applications", applicationRoutes);
 
-// test route
+/* ---------------- TEST ROUTE ---------------- */
+
 app.get("/", (req, res) => {
-  res.send("SkillSync Backend is running 🚀");
+  res.send("SkillSync Backend Running 🚀");
 });
 
-// start server
-const PORT = process.env.PORT || 5000;
+/* ---------------- DB ---------------- */
 
-app.listen(PORT, () => {
-  console.log(`Server running on port ${PORT}`);
-});
+mongoose
+  .connect(process.env.MONGO_URI)
+  .then(() => {
+    console.log("MongoDB Connected ✅");
+
+    const PORT = process.env.PORT || 5000;
+
+    app.listen(PORT, () => {
+      console.log(`Server running on port ${PORT}`);
+    });
+  })
+  .catch((err) => {
+    console.log("MongoDB Error ❌", err.message);
+  });

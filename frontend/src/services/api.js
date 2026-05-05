@@ -1,7 +1,5 @@
 import axios from "axios";
 
-const API = axios.create({
-  baseURL: "http://127.0.0.1:5000/api",
+export default axios.create({
+  baseURL: "https://job-portal-kx59.onrender.com/api",
 });
-
-export default API;
