@@ -5,7 +5,7 @@ SkillSync is a full-stack job portal web application that connects job seekers w
 ---
 
 ## 🌐 Live Demo
-- Frontend: https://your-vercel-link.vercel.app  
+- Frontend: https://job-portal-bay-one.vercel.app
 - Backend API: https://job-portal-kx59.onrender.com  
 
 ---
