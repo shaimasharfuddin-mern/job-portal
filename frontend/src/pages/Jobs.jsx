@@ -19,21 +19,30 @@ function Jobs() {
 
   const handleApply = async (jobId) => {
     try {
+      const userId = localStorage.getItem("userId");
+
+      if (!userId) {
+        alert("Please login again");
+        return;
+      }
+
       const res = await API.post("/applications/apply", {
         jobId,
+        userId,
       });
 
-      console.log("APPLY SUCCESS:", res.data);
-      alert("Applied successfully!");
+      alert(res.data.message || "Applied successfully!");
     } catch (err) {
       console.log("APPLY ERROR:", err.response?.data || err.message);
-      alert("Apply failed");
+      alert(err.response?.data?.message || "Apply failed");
     }
   };
 
   return (
     <div style={{ padding: "20px" }}>
       <h2>Jobs</h2>
+
+      {jobs.length === 0 && <p>No jobs available</p>}
 
       {jobs.map((job) => (
         <div

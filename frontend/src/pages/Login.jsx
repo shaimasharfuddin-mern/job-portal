@@ -24,14 +24,15 @@ function Login() {
 
       console.log("LOGIN SUCCESS:", res.data);
 
-      // Save token
+      // Save token + userId (CRITICAL FIX)
       localStorage.setItem("token", res.data.token);
+      localStorage.setItem("userId", res.data.user._id);
 
       alert("Login successful!");
 
-      // ✅ SAFE REDIRECT (IMPORTANT FIX)
+      // redirect
       setTimeout(() => {
-        navigate("/jobs", { replace: true });
+        navigate("/jobs");
       }, 300);
 
     } catch (err) {
@@ -47,25 +48,29 @@ function Login() {
       <h2>Login</h2>
 
       <form onSubmit={handleLogin}>
-        <input
-          type="email"
-          placeholder="Email"
-          value={email}
-          onChange={(e) => setEmail(e.target.value)}
-          required
-        />
+        <div>
+          <input
+            type="email"
+            placeholder="Email"
+            value={email}
+            onChange={(e) => setEmail(e.target.value)}
+            required
+          />
+        </div>
 
-        <br /><br />
+        <br />
 
-        <input
-          type="password"
-          placeholder="Password"
-          value={password}
-          onChange={(e) => setPassword(e.target.value)}
-          required
-        />
+        <div>
+          <input
+            type="password"
+            placeholder="Password"
+            value={password}
+            onChange={(e) => setPassword(e.target.value)}
+            required
+          />
+        </div>
 
-        <br /><br />
+        <br />
 
         <button type="submit" disabled={loading}>
           {loading ? "Logging in..." : "Login"}
