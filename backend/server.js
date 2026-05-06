@@ -7,45 +7,36 @@ dotenv.config();
 
 const authRoutes = require("./routes/authRoutes");
 const jobRoutes = require("./routes/jobRoutes");
+const applicationRoutes = require("./routes/applicationRoutes");
 
 const app = express();
 
-/* ---------------- CORS ---------------- */
+/* ---------------- MIDDLEWARE ---------------- */
 
 app.use(
   cors({
     origin: "*",
-    methods: "*",
-    allowedHeaders: "*",
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    credentials: true,
   })
 );
 
-/* ---------------- HARD BODY FIX (IMPORTANT) ---------------- */
-
-// This forces Express to ALWAYS parse JSON safely
-app.use(express.json({ limit: "10mb" }));
+app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
-
-// 🔥 EXTRA SAFETY: manual body capture (fallback)
-app.use((req, res, next) => {
-  if (!req.body) {
-    req.body = {};
-  }
-  next();
-});
 
 /* ---------------- ROUTES ---------------- */
 
 app.use("/api/auth", authRoutes);
 app.use("/api/jobs", jobRoutes);
+app.use("/api/applications", applicationRoutes);
 
 /* ---------------- TEST ROUTE ---------------- */
 
 app.get("/", (req, res) => {
-  res.send("SkillSync Backend Running 🚀");
+  res.send("Job Portal Backend Running 🚀");
 });
 
-/* ---------------- DB ---------------- */
+/* ---------------- DB CONNECTION ---------------- */
 
 mongoose
   .connect(process.env.MONGO_URI)
@@ -59,5 +50,5 @@ mongoose
     });
   })
   .catch((err) => {
-    console.log("MongoDB Error ❌", err.message);
+    console.log("MongoDB Connection Failed ❌", err.message);
   });

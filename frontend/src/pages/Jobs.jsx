@@ -4,44 +4,51 @@ import API from "../services/api";
 function Jobs() {
   const [jobs, setJobs] = useState([]);
 
-  const fetchJobs = async () => {
-    const res = await API.get("/jobs");
-    setJobs(res.data);
-  };
-
-  const applyJob = async (jobId) => {
-    const token = localStorage.getItem("token");
-    const userId = JSON.parse(atob(token.split(".")[1])).id;
-
-    await API.post("/applications/apply", {
-      userId,
-      jobId,
-    });
-
-    alert("Applied successfully!");
-  };
-
-  const logout = () => {
-    localStorage.removeItem("token");
-    window.location.href = "/";
-  };
-
   useEffect(() => {
+    const fetchJobs = async () => {
+      try {
+        const res = await API.get("/jobs");
+        setJobs(res.data);
+      } catch (err) {
+        console.log("JOB FETCH ERROR:", err);
+      }
+    };
+
     fetchJobs();
   }, []);
 
+  const handleApply = async (jobId) => {
+    try {
+      const res = await API.post("/applications/apply", {
+        jobId,
+      });
+
+      console.log("APPLY SUCCESS:", res.data);
+      alert("Applied successfully!");
+    } catch (err) {
+      console.log("APPLY ERROR:", err.response?.data || err.message);
+      alert("Apply failed");
+    }
+  };
+
   return (
-    <div>
+    <div style={{ padding: "20px" }}>
       <h2>Jobs</h2>
 
-      <button onClick={logout}>Logout</button>
-
       {jobs.map((job) => (
-        <div key={job._id}>
+        <div
+          key={job._id}
+          style={{
+            border: "1px solid #ccc",
+            padding: "10px",
+            marginBottom: "10px",
+          }}
+        >
           <h3>{job.title}</h3>
           <p>{job.company}</p>
+          <p>{job.location}</p>
 
-          <button onClick={() => applyJob(job._id)}>
+          <button onClick={() => handleApply(job._id)}>
             Apply
           </button>
         </div>
