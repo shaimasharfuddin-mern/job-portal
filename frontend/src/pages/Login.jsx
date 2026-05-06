@@ -6,6 +6,7 @@ function Login() {
   const [email, setEmail] = useState("");
   const [password, setPassword] = useState("");
   const [error, setError] = useState("");
+  const [loading, setLoading] = useState(false);
 
   const navigate = useNavigate();
 
@@ -14,6 +15,7 @@ function Login() {
 
     try {
       setError("");
+      setLoading(true);
 
       const res = await API.post("/auth/login", {
         email,
@@ -22,16 +24,21 @@ function Login() {
 
       console.log("LOGIN SUCCESS:", res.data);
 
+      // Save token
       localStorage.setItem("token", res.data.token);
 
       alert("Login successful!");
 
-      // ✅ FIXED REDIRECT (NO 404)
-      navigate("/jobs");
+      // ✅ SAFE REDIRECT (IMPORTANT FIX)
+      setTimeout(() => {
+        navigate("/jobs", { replace: true });
+      }, 300);
 
     } catch (err) {
       console.log("LOGIN ERROR:", err.response?.data || err.message);
       setError(err.response?.data?.message || "Login failed");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -60,7 +67,9 @@ function Login() {
 
         <br /><br />
 
-        <button type="submit">Login</button>
+        <button type="submit" disabled={loading}>
+          {loading ? "Logging in..." : "Login"}
+        </button>
       </form>
 
       {error && <p style={{ color: "red" }}>{error}</p>}
